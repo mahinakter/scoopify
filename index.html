@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scoopify ✨ — USA Only</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:      #FFB7CC;
+      --pink-deep: #FF85A1;
+      --cream:     #FFF0F5;
+      --lavender:  #E8C7FF;
+      --lav-deep:  #CC99FF;
+      --coral:     #FF4D88;
+      --coral-dark:#E0006A;
+      --dark:      #2D1A2E;
+      --mid:       #7A5C7A;
+      --light:     #FFE6F0;
+      --white:     #FFFFFF;
+      --usa-blue:  #1A3A6B;
+      --sanrio-yellow: #FFE566;
+      --sanrio-mint:   #B8F0E0;
+      --sanrio-red:    #FF3355;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(255,183,204,0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(232,199,255,0.18) 0%, transparent 40%);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .announcement {
+      background: linear-gradient(90deg, #FFB7CC, #FF85A1, #CC99FF, #FF85A1, #FFB7CC);
+      background-size: 200%;
+      animation: shimmer 4s linear infinite;
+      text-align: center;
+      padding: 8px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 0.02em;
+    }
+    @keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+    /* ── USA BANNER ── */
+    .usa-banner {
+      background: var(--usa-blue);
+      color: white;
+      text-align: center;
+      padding: 7px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .usa-banner span { opacity: 0.75; font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--pink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(247,197,213,0.25);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo span { color: var(--coral); }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--coral); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--light);
+      border: 2px solid transparent;
+      border-radius: 24px;
+      padding: 7px 14px;
+      gap: 7px;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus-within { border-color: var(--lavender); }
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--dark);
+      width: 160px;
+    }
+    .cart-btn {
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 24px;
+      padding: 8px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cart-btn:hover { background: var(--coral-dark); transform: scale(1.03); }
+    .cart-badge {
+      background: white;
+      color: var(--coral);
+      border-radius: 50%;
+      width: 18px; height: 18px;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── FREE SHIPPING PROGRESS BAR ── */
+    .shipping-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--pink);
+      padding: 10px 24px;
+    }
+    .shipping-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .shipping-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--mid);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .shipping-label .goal { color: var(--coral); }
+    .progress-track {
+      height: 8px;
+      background: var(--light);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink-deep), var(--coral));
+      border-radius: 99px;
+      transition: width 0.5s ease;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      background: linear-gradient(160deg, #FFD6E8 0%, #FFEEF6 30%, #EDD6FF 65%, #FFD6E8 100%);
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── KAWAII BG LAYER ── */
+    .kawaii-bg {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .kw-char {
+      position: absolute;
+      opacity: 0.22;
+    }
+    .kw-1 { width:130px; top:4%; left:2%; animation: kawaii-float 7s ease-in-out infinite; }
+    .kw-2 { width:120px; top:3%; right:3%; animation: kawaii-float 6s ease-in-out infinite 1.2s; }
+    .kw-3 { width:110px; bottom:5%; left:5%; animation: kawaii-float 8s ease-in-out infinite 0.7s; }
+    .kw-4 { width:125px; bottom:4%; right:4%; animation: kawaii-float 5.5s ease-in-out infinite 2s; }
+
+    .kw-bag {
+      position: absolute;
+      opacity: 0.28;
+    }
+    .kw-b1 { width:80px; top:12%; left:22%; animation: kawaii-float 6s ease-in-out infinite 0.3s; }
+    .kw-b2 { width:75px; top:10%; right:20%; animation: kawaii-float 7s ease-in-out infinite 1.8s; }
+    .kw-b3 { width:65px; bottom:14%; left:38%; animation: kawaii-float 5s ease-in-out infinite 1s; }
+
+    .kw-sparkle {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.45;
+      color: var(--coral);
+      animation: sparkle-spin 4s ease-in-out infinite;
+    }
+    .s1 { top:8%; left:32%; animation-delay:0s; color:#FF85A1; font-size:22px; }
+    .s2 { top:18%; left:14%; animation-delay:0.5s; color:#CC99FF; font-size:16px; }
+    .s3 { top:22%; right:14%; animation-delay:1s; color:#FFB7CC; font-size:20px; }
+    .s4 { bottom:18%; left:28%; animation-delay:1.5s; color:#FFE566; font-size:18px; }
+    .s5 { bottom:25%; right:18%; animation-delay:0.8s; color:#FF85A1; font-size:14px; }
+    .s6 { top:40%; left:8%; animation-delay:2s; color:#CC99FF; font-size:16px; }
+    .s7 { top:35%; right:7%; animation-delay:2.5s; color:#FFB7CC; font-size:20px; }
+    .s8 { bottom:10%; right:30%; animation-delay:1.2s; color:#FFE566; font-size:15px; }
+
+    @keyframes kawaii-float {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-20px) rotate(3deg); }
+    }
+    @keyframes sparkle-spin {
+      0%,100% { transform: scale(1) rotate(0deg); opacity: 0.45; }
+      50%      { transform: scale(1.4) rotate(20deg); opacity: 0.8; }
+    }
+
+    /* ── HERO CONTENT ── */
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-block;
+      background: white;
+      color: var(--coral);
+      border: 2px solid var(--pink);
+      border-radius: 99px;
+      padding: 6px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(255,77,136,0.15);
+    }
+    .hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.12;
+      text-shadow: 0 2px 0 rgba(255,183,204,0.4);
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--coral);
+      background: linear-gradient(90deg, var(--coral), var(--lav-deep));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 480px;
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .hero-tags {
+      margin-top: 26px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      background: white;
+      color: var(--dark);
+      border-radius: 24px;
+      padding: 9px 20px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 2px solid var(--pink);
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(255,77,136,0.1);
+    }
+    .hero-tag:hover, .hero-tag.active {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,77,136,0.3);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .shop-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 24px 60px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 80px; }
+    .sidebar-section {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 2px solid var(--pink);
+    }
+    .sidebar-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 14px;
+    }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      cursor: pointer;
+    }
+    .filter-option input[type="checkbox"] { accent-color: var(--coral); width: 16px; height: 16px; }
+    .filter-option label { font-size: 14px; font-weight: 600; color: var(--dark); cursor: pointer; }
+    .price-inputs { display: flex; gap: 8px; margin-top: 4px; }
+    .price-input {
+      width: 80px;
+      padding: 7px 10px;
+      border: 2px solid var(--pink);
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      color: var(--dark);
+      transition: border-color 0.2s;
+    }
+    .price-input:focus { border-color: var(--lav-deep); }
+    .apply-btn {
+      margin-top: 10px;
+      width: 100%;
+      background: var(--lavender);
+      color: var(--dark);
+      border: none;
+      border-radius: 10px;
+      padding: 9px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .apply-btn:hover { background: var(--lav-deep); }
+    .sort-select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 2px solid var(--pink);
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      background: var(--white);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Shipping info box in sidebar */
+    .shipping-info-box {
+      background: linear-gradient(135deg, #EEF4FF, #F0EAF8);
+      border: 2px solid var(--lavender);
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--dark);
+    }
+    .shipping-info-box strong {
+      display: block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: var(--usa-blue);
+    }
+    .shipping-info-box .flag { font-size: 20px; margin-right: 4px; }
+
+    /* ── PRODUCT GRID ── */
+    .grid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .grid-header h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+    .grid-header span { font-size: 13px; color: var(--mid); font-weight: 500; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--pink);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(247,197,213,0.5);
+      border-color: var(--pink-deep);
+    }
+    .badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 2;
+      letter-spacing: 0.04em;
+    }
+    .badge.new { background: var(--lav-deep); }
+    .badge.sale { background: var(--coral); }
+    .wishlist-btn {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      background: white;
+      border: 2px solid var(--pink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.2s;
+    }
+    .wishlist-btn:hover { border-color: var(--coral); transform: scale(1.1); }
+    .wishlist-btn.active { border-color: var(--coral); background: var(--pink); }
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+    }
+    .product-info { padding: 14px 16px 16px; }
+    .product-name {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .product-price {
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--coral);
+    }
+    .product-desc {
+      font-size: 12px;
+      color: var(--mid);
+      margin-bottom: 10px;
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .badge.best { background: linear-gradient(135deg, #FFB700, #FF8C00); }
+    .product-stars { font-size: 12px; color: #FFBB33; }
+    .add-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      padding: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .add-btn:hover { background: linear-gradient(135deg, var(--pink-deep), var(--lav-deep)); transform: scale(1.02); }
+    .add-btn.added { background: linear-gradient(135deg, var(--coral), #FF8E8E); color: white; }
+
+    /* ── FAQ ── */
+    .faq-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+    .faq-section h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 2px solid var(--pink);
+      border-radius: 16px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .faq-q:hover { color: var(--coral); }
+    .faq-icon { font-size: 18px; transition: transform 0.3s; }
+    .faq-a { display: none; padding: 0 20px 16px; font-size: 14px; line-height: 1.7; color: var(--mid); }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 48px 24px 28px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 36px;
+    }
+    .footer-brand .logo { color: white; }
+    .footer-brand p {
+      margin-top: 12px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+    .footer-ship-note {
+      margin-top: 12px;
+      background: rgba(26,58,107,0.4);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .footer-socials { display: flex; gap: 10px; margin-top: 18px; }
+    .social-link {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social-link:hover { background: var(--coral); }
+    .footer-col h4 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { text-decoration: none; font-size: 14px; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--pink); }
+    .email-form { display: flex; gap: 8px; margin-top: 4px; }
+    .email-input {
+      flex: 1;
+      padding: 9px 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      outline: none;
+    }
+    .email-input::placeholder { color: rgba(255,255,255,0.35); }
+    .email-btn {
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .email-btn:hover { background: var(--coral-dark); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      background: var(--dark);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 900px) {
+      .shop-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .search-box input { width: 100px; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── OVERLAY ── */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 200;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .overlay.show { opacity: 1; pointer-events: all; }
+
+    /* ── CART DRAWER ── */
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 380px; max-width: 100vw;
+      background: var(--white);
+      z-index: 300;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -4px 0 32px rgba(0,0,0,0.12);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 22px;
+      border-bottom: 2px solid var(--pink);
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px; font-weight: 900;
+    }
+    .close-btn {
+      background: var(--light); border: none; border-radius: 50%;
+      width: 32px; height: 32px; font-size: 16px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .close-btn:hover { background: var(--pink); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px 22px; }
+    .cart-empty {
+      text-align: center; padding: 60px 20px;
+      font-family: 'Nunito', sans-serif; font-size: 15px; color: var(--mid);
+    }
+    .cart-empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .cart-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--light);
+    }
+    .cart-item-emoji { font-size: 36px; width: 50px; text-align: center; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; color: var(--dark); line-height: 1.3; }
+    .cart-item-price { font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 900; color: var(--coral); margin-top: 2px; }
+    .cart-item-qty { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .qty-btn {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 1.5px solid var(--pink); background: none;
+      font-size: 14px; font-weight: 900; cursor: pointer; color: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .qty-btn:hover { background: var(--pink); }
+    .qty-val { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; min-width: 20px; text-align: center; }
+    .remove-item { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--mid); transition: color 0.2s; padding: 4px; }
+    .remove-item:hover { color: var(--coral); }
+    .drawer-footer {
+      padding: 18px 22px;
+      border-top: 2px solid var(--pink);
+      background: var(--cream);
+    }
+    .cart-summary-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: var(--mid); margin-bottom: 6px;
+      font-family: 'Nunito', sans-serif; font-weight: 700;
+    }
+    .cart-summary-row.total {
+      font-size: 17px; font-weight: 900; color: var(--dark);
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1.5px dashed var(--pink);
+    }
+    .checkout-btn {
+      width: 100%; margin-top: 14px;
+      background: var(--coral); color: white;
+      border: none; border-radius: 14px;
+      padding: 14px; font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 900; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .checkout-btn:hover { background: var(--coral-dark); transform: scale(1.01); }
+    .checkout-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    /* ── BILLING MODAL ── */
+    .billing-modal {
+      position: fixed; inset: 0; z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .billing-modal.open { opacity: 1; pointer-events: all; }
+    .billing-box {
+      background: var(--white);
+      border-radius: 24px;
+      width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .billing-modal.open .billing-box { transform: translateY(0) scale(1); }
+    .billing-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 26px;
+      border-bottom: 2px solid var(--pink);
+      position: sticky; top: 0; background: var(--white); z-index: 1;
+      border-radius: 24px 24px 0 0;
+    }
+    .billing-head h2 { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; }
+    .billing-steps {
+      display: flex; gap: 0; align-items: center;
+      padding: 16px 26px;
+      border-bottom: 1px solid var(--light);
+    }
+    .step-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--light); border: 2px solid var(--pink);
+      font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mid); flex-shrink: 0; transition: all 0.3s;
+    }
+    .step-dot.active { background: var(--coral); border-color: var(--coral); color: white; }
+    .step-dot.done { background: var(--lavender); border-color: var(--lav-deep); color: var(--dark); }
+    .step-line { flex: 1; height: 2px; background: var(--pink); border-radius: 2px; }
+    .step-label { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800; color: var(--mid); text-transform: uppercase; letter-spacing: 0.06em; }
+    .billing-body { padding: 22px 26px; }
+    .billing-section-title {
+      font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 900;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 14px;
+    }
+    .form-row { display: flex; gap: 14px; margin-bottom: 14px; }
+    .form-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; color: var(--mid); text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group input, .form-group select {
+      padding: 10px 14px; border: 2px solid var(--pink); border-radius: 12px;
+      font-family: 'Inter', sans-serif; font-size: 14px; color: var(--dark);
+      background: var(--white); outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--lav-deep); }
+    .form-group input.error { border-color: var(--coral); }
+    .card-icons { display: flex; gap: 8px; margin-bottom: 10px; font-size: 22px; }
+    .order-review-items { margin-bottom: 16px; }
+    .review-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--light); font-size: 13px;
+    }
+    .review-item-emoji { font-size: 28px; }
+    .review-item-name { flex: 1; font-family: 'Nunito', sans-serif; font-weight: 700; }
+    .review-item-price { font-family: 'Nunito', sans-serif; font-weight: 900; color: var(--coral); }
+    .billing-totals { margin: 16px 0; }
+    .billing-total-row {
+      display: flex; justify-content: space-between;
+      font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700;
+      color: var(--mid); padding: 5px 0;
+    }
+    .billing-total-row.grand {
+      font-size: 18px; font-weight: 900; color: var(--dark);
+      border-top: 2px dashed var(--pink); margin-top: 8px; padding-top: 12px;
+    }
+    .billing-total-row.grand span:last-child { color: var(--coral); }
+    .billing-actions { display: flex; gap: 12px; margin-top: 20px; }
+    .btn-back {
+      flex: 1; padding: 13px; background: var(--light); color: var(--dark);
+      border: none; border-radius: 12px; font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 15px; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-back:hover { background: var(--pink); }
+    .btn-next {
+      flex: 2; padding: 13px; background: var(--coral); color: white;
+      border: none; border-radius: 12px; font-family: 'Nunito', sans-serif;
+      font-weight: 900; font-size: 15px; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-next:hover { background: var(--coral-dark); transform: scale(1.01); }
+    .success-screen { text-align: center; padding: 40px 20px; }
+    .success-icon { font-size: 64px; margin-bottom: 16px; }
+    .success-screen h3 { font-family: 'Nunito', sans-serif; font-size: 24px; font-weight: 900; color: var(--dark); margin-bottom: 10px; }
+    .success-screen p { font-size: 15px; color: var(--mid); line-height: 1.6; }
+    .order-num {
+      display: inline-block; margin-top: 16px;
+      background: var(--light); border-radius: 10px; padding: 10px 20px;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px; color: var(--coral);
+    }
+    .billing-step-panel { display: none; }
+    .billing-step-panel.active { display: block; }
+
+    /* ── SANRIO THEME EXTRAS ── */
+
+    /* Page-wide kawaii pattern overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,183,204,0.08) 1px, transparent 1px),
+        radial-gradient(circle, rgba(204,153,255,0.07) 1px, transparent 1px);
+      background-size: 40px 40px, 60px 60px;
+      background-position: 0 0, 20px 20px;
+    }
+
+    /* Nav Sanrio style */
+    nav { border-bottom: 3px solid var(--pink); }
+    .logo-icon {
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      box-shadow: 0 2px 8px rgba(255,77,136,0.2);
+    }
+    .nav-links a.active { color: var(--coral); }
+
+    /* Announcement text color */
+    .announcement { color: white; text-shadow: 0 1px 2px rgba(200,0,80,0.2); }
+
+    /* Card Sanrio glow */
+    .product-card {
+      border: 2.5px solid var(--pink);
+      background: linear-gradient(160deg, #fff 60%, #FFF0F8 100%);
+    }
+    .product-card:hover {
+      box-shadow: 0 14px 36px rgba(255,77,136,0.22);
+      border-color: var(--coral);
+    }
+    .product-img {
+      background: linear-gradient(135deg, #FFF0F8, #F0E6FF);
+      font-size: 80px;
+    }
+
+    /* Cute kawaii hearts pattern on product image area */
+    .product-img::after {
+      content: none;
+    }
+
+    /* Add-to-bag button — Sanrio gradient */
+    .add-btn {
+      background: linear-gradient(135deg, #FFB7CC, #CC99FF);
+      font-size: 13px;
+    }
+    .add-btn:hover {
+      background: linear-gradient(135deg, #FF85A1, #AA77EE);
+    }
+    .add-btn.added {
+      background: linear-gradient(135deg, var(--coral), #FF85A1);
+    }
+
+    /* Sidebar Sanrio */
+    .sidebar-section {
+      border: 2px solid var(--pink);
+      background: linear-gradient(160deg, #fff 70%, #FFF0F8 100%);
+    }
+    .shipping-info-box {
+      background: linear-gradient(135deg, #FFF0F8, #F0E6FF);
+      border-color: var(--lavender);
+    }
+
+    /* FAQ items */
+    .faq-item { border: 2px solid var(--pink); }
+    .faq-q:hover { color: var(--coral); }
+
+    /* Checkout button Sanrio */
+    .checkout-btn {
+      background: linear-gradient(135deg, var(--coral), var(--lav-deep));
+    }
+    .checkout-btn:hover {
+      background: linear-gradient(135deg, var(--coral-dark), #AA77EE);
+    }
+
+    /* Cart drawer Sanrio header */
+    .drawer-header {
+      background: linear-gradient(135deg, #FFF0F8, #F0E6FF);
+    }
+
+    /* Kawaii border on sidebar title */
+    .sidebar-title::before {
+      content: "✿ ";
+      color: var(--coral);
+    }
+
+    /* Star rating color update */
+    .product-stars { color: var(--coral); }
+
+    /* Progress bar Sanrio */
+    .progress-fill {
+      background: linear-gradient(90deg, #FF85A1, #CC99FF, #FF85A1);
+      background-size: 200%;
+      animation: shimmer 2s linear infinite;
+    }
+
+    /* Badge styling */
+    .badge.new { background: linear-gradient(135deg, #CC99FF, #FF85A1); }
+    .badge.sale { background: linear-gradient(135deg, var(--coral), #FF85A1); }
+
+    /* Hero badge */
+    .hero-badge {
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge {
+      0%,100% { transform: scale(1); box-shadow: 0 2px 12px rgba(255,77,136,0.15); }
+      50%      { transform: scale(1.04); box-shadow: 0 4px 20px rgba(255,77,136,0.3); }
+    }
+
+    /* Kawaii cart badge */
+    .cart-btn {
+      background: linear-gradient(135deg, var(--coral), var(--lav-deep));
+    }
+    .cart-btn:hover {
+      background: linear-gradient(135deg, var(--coral-dark), #AA77EE);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="announcement">
+    🌸 FREE shipping on orders over $300 · 🇺🇸 USA delivery only · ✨ New mystery scoops & handbags just dropped!
+  </div>
+
+  <!-- USA BANNER -->
+  <div class="usa-banner">
+    🇺🇸 <strong>We ship exclusively within the United States.</strong> <span>Residential addresses only — no P.O. boxes or military addresses.</span>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">🎀</div>
+        Scoop<span>ify</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#" class="active">All Products</a></li>
+        <li><a href="#">Mystery Bundles</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search products…" />
+        </div>
+        <button class="cart-btn" onclick="openCart()">
+          🛍 Cart <div class="cart-badge" id="cartBadge">0</div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FREE SHIPPING PROGRESS BAR -->
+  <div class="shipping-bar">
+    <div class="shipping-bar-inner">
+      <div class="shipping-label">
+        <span id="shippingMsg">Add items to unlock free shipping!</span>
+        <span class="goal">Free shipping at $300</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Floating kawaii background layer -->
+    <div class="kawaii-bg" aria-hidden="true">
+
+      <!-- Hello Kitty face top-left -->
+      <svg class="kw-char kw-1" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="40" cy="44" rx="32" ry="30" fill="#fff" stroke="#FFB7CC" stroke-width="2"/>
+        <ellipse cx="40" cy="44" rx="32" ry="30" fill="white"/>
+        <!-- ears -->
+        <polygon points="14,20 22,38 6,38" fill="white" stroke="#FFB7CC" stroke-width="2"/>
+        <polygon points="66,20 74,38 58,38" fill="white" stroke="#FFB7CC" stroke-width="2"/>
+        <!-- ear pink -->
+        <polygon points="14,22 20,36 8,36" fill="#FFB7CC"/>
+        <polygon points="66,22 72,36 60,36" fill="#FFB7CC"/>
+        <!-- eyes -->
+        <ellipse cx="31" cy="44" rx="4" ry="5" fill="#2D1A2E"/>
+        <ellipse cx="49" cy="44" rx="4" ry="5" fill="#2D1A2E"/>
+        <circle cx="33" cy="42" r="1.5" fill="white"/>
+        <circle cx="51" cy="42" r="1.5" fill="white"/>
+        <!-- nose -->
+        <ellipse cx="40" cy="52" rx="3" ry="2" fill="#FF85A1"/>
+        <!-- bow -->
+        <polygon points="52,28 60,22 60,34" fill="#FF3355"/>
+        <polygon points="68,28 60,22 60,34" fill="#FF3355"/>
+        <circle cx="60" cy="28" r="3" fill="#FF6699"/>
+        <!-- whiskers -->
+        <line x1="8" y1="50" x2="30" y2="52" stroke="#ccc" stroke-width="1.2"/>
+        <line x1="8" y1="55" x2="30" y2="55" stroke="#ccc" stroke-width="1.2"/>
+        <line x1="50" y1="52" x2="72" y2="50" stroke="#ccc" stroke-width="1.2"/>
+        <line x1="50" y1="55" x2="72" y2="55" stroke="#ccc" stroke-width="1.2"/>
+      </svg>
+
+      <!-- My Melody face top-right -->
+      <svg class="kw-char kw-2" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- hood -->
+        <ellipse cx="40" cy="46" rx="34" ry="32" fill="#FF99BB"/>
+        <!-- face -->
+        <ellipse cx="40" cy="50" rx="26" ry="24" fill="#FFF0F5"/>
+        <!-- hood ears -->
+        <ellipse cx="18" cy="24" rx="10" ry="14" fill="#FF99BB"/>
+        <ellipse cx="62" cy="24" rx="10" ry="14" fill="#FF99BB"/>
+        <!-- inner ears -->
+        <ellipse cx="18" cy="26" rx="6" ry="9" fill="#FF3355" opacity="0.4"/>
+        <ellipse cx="62" cy="26" rx="6" ry="9" fill="#FF3355" opacity="0.4"/>
+        <!-- eyes -->
+        <ellipse cx="33" cy="48" rx="4" ry="5" fill="#2D1A2E"/>
+        <ellipse cx="47" cy="48" rx="4" ry="5" fill="#2D1A2E"/>
+        <circle cx="35" cy="46" r="1.5" fill="white"/>
+        <circle cx="49" cy="46" r="1.5" fill="white"/>
+        <!-- nose -->
+        <ellipse cx="40" cy="56" rx="3" ry="2" fill="#FF85A1"/>
+        <!-- blush -->
+        <ellipse cx="28" cy="56" rx="5" ry="3" fill="#FF85A1" opacity="0.5"/>
+        <ellipse cx="52" cy="56" rx="5" ry="3" fill="#FF85A1" opacity="0.5"/>
+        <!-- flower on hood -->
+        <circle cx="40" cy="30" r="6" fill="#FFE566"/>
+        <circle cx="40" cy="30" r="3" fill="#FF99BB"/>
+        <circle cx="40" cy="24" r="4" fill="#FFE566"/>
+        <circle cx="40" cy="36" r="4" fill="#FFE566"/>
+        <circle cx="34" cy="27" r="4" fill="#FFE566"/>
+        <circle cx="46" cy="27" r="4" fill="#FFE566"/>
+        <circle cx="40" cy="30" r="3" fill="#FF85A1"/>
+      </svg>
+
+      <!-- Cinnamoroll face bottom-left -->
+      <svg class="kw-char kw-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- head (big round) -->
+        <ellipse cx="40" cy="46" rx="34" ry="32" fill="white" stroke="#E8C7FF" stroke-width="1.5"/>
+        <!-- ears (floppy) -->
+        <ellipse cx="16" cy="30" rx="10" ry="18" fill="#E8C7FF" transform="rotate(-20,16,30)"/>
+        <ellipse cx="64" cy="30" rx="10" ry="18" fill="#E8C7FF" transform="rotate(20,64,30)"/>
+        <ellipse cx="16" cy="30" rx="6" ry="13" fill="#CC99FF" opacity="0.4" transform="rotate(-20,16,30)"/>
+        <ellipse cx="64" cy="30" rx="6" ry="13" fill="#CC99FF" opacity="0.4" transform="rotate(20,64,30)"/>
+        <!-- eyes -->
+        <ellipse cx="33" cy="46" rx="5" ry="6" fill="#4488FF"/>
+        <ellipse cx="47" cy="46" rx="5" ry="6" fill="#4488FF"/>
+        <ellipse cx="33" cy="46" rx="3.5" ry="4.5" fill="#1A2266"/>
+        <ellipse cx="47" cy="46" rx="3.5" ry="4.5" fill="#1A2266"/>
+        <circle cx="35" cy="44" r="1.5" fill="white"/>
+        <circle cx="49" cy="44" r="1.5" fill="white"/>
+        <!-- nose -->
+        <ellipse cx="40" cy="54" rx="4" ry="3" fill="#CC99FF"/>
+        <!-- tail curl on top -->
+        <path d="M36,18 Q30,8 40,10 Q50,8 44,18" fill="none" stroke="#E8C7FF" stroke-width="3" stroke-linecap="round"/>
+        <!-- blush -->
+        <ellipse cx="26" cy="54" rx="6" ry="4" fill="#FFB7CC" opacity="0.55"/>
+        <ellipse cx="54" cy="54" rx="6" ry="4" fill="#FFB7CC" opacity="0.55"/>
+      </svg>
+
+      <!-- Pompompurin bottom-right -->
+      <svg class="kw-char kw-4" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- beret -->
+        <ellipse cx="40" cy="24" rx="30" ry="14" fill="#CC8833"/>
+        <ellipse cx="40" cy="22" rx="24" ry="10" fill="#FFAA33"/>
+        <!-- face -->
+        <ellipse cx="40" cy="50" rx="30" ry="28" fill="#FFE566"/>
+        <!-- ears -->
+        <ellipse cx="13" cy="44" rx="8" ry="10" fill="#FFE566"/>
+        <ellipse cx="67" cy="44" rx="8" ry="10" fill="#FFE566"/>
+        <!-- eyes -->
+        <ellipse cx="31" cy="47" rx="5" ry="6" fill="#2D1A2E"/>
+        <ellipse cx="49" cy="47" rx="5" ry="6" fill="#2D1A2E"/>
+        <circle cx="33" cy="45" r="1.5" fill="white"/>
+        <circle cx="51" cy="45" r="1.5" fill="white"/>
+        <!-- nose -->
+        <ellipse cx="40" cy="56" rx="4" ry="3" fill="#CC6633"/>
+        <!-- mouth -->
+        <path d="M35,61 Q40,66 45,61" fill="none" stroke="#CC6633" stroke-width="2" stroke-linecap="round"/>
+        <!-- blush -->
+        <ellipse cx="25" cy="56" rx="6" ry="3.5" fill="#FF99AA" opacity="0.5"/>
+        <ellipse cx="55" cy="56" rx="6" ry="3.5" fill="#FF99AA" opacity="0.5"/>
+        <!-- beret dot -->
+        <circle cx="40" cy="14" r="4" fill="#CC8833"/>
+      </svg>
+
+      <!-- Floating handbags -->
+      <!-- Handbag 1 -->
+      <svg class="kw-bag kw-b1" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20,22 Q20,12 30,12 Q40,12 40,22" fill="none" stroke="#FF85A1" stroke-width="3" stroke-linecap="round"/>
+        <rect x="8" y="22" width="44" height="38" rx="10" fill="#FF85A1"/>
+        <rect x="8" y="22" width="44" height="38" rx="10" fill="url(#baggrad1)" opacity="0.3"/>
+        <rect x="22" y="34" width="16" height="12" rx="4" fill="white" opacity="0.7"/>
+        <circle cx="30" cy="40" r="3" fill="#FF3355"/>
+        <ellipse cx="30" cy="25" rx="8" ry="2" fill="#FF3355" opacity="0.4"/>
+        <defs><linearGradient id="baggrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+      </svg>
+
+      <!-- Handbag 2 (tote) -->
+      <svg class="kw-bag kw-b2" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15,20 Q10,10 30,10 Q50,10 45,20" fill="none" stroke="#CC99FF" stroke-width="3" stroke-linecap="round"/>
+        <rect x="6" y="20" width="48" height="42" rx="8" fill="#CC99FF"/>
+        <rect x="6" y="20" width="48" height="42" rx="8" fill="url(#baggrad2)" opacity="0.35"/>
+        <!-- bow decoration -->
+        <polygon points="22,38 30,33 30,43" fill="white" opacity="0.8"/>
+        <polygon points="38,38 30,33 30,43" fill="white" opacity="0.8"/>
+        <circle cx="30" cy="38" r="3" fill="#E8C7FF"/>
+        <!-- stripes -->
+        <line x1="6" y1="32" x2="54" y2="32" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <line x1="6" y1="44" x2="54" y2="44" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <defs><linearGradient id="baggrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+      </svg>
+
+      <!-- Handbag 3 (mini crossbody) -->
+      <svg class="kw-bag kw-b3" viewBox="0 0 55 60" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="5" x2="50" y2="5" stroke="#FFE566" stroke-width="3" stroke-linecap="round"/>
+        <rect x="8" y="14" width="38" height="36" rx="10" fill="#FFE566"/>
+        <rect x="8" y="14" width="38" height="36" rx="10" fill="url(#baggrad3)" opacity="0.3"/>
+        <circle cx="27" cy="30" r="8" fill="white" opacity="0.6"/>
+        <text x="27" y="34" text-anchor="middle" font-size="10" fill="#FFB7CC">✿</text>
+        <rect x="20" y="46" width="14" height="4" rx="2" fill="#FFCC00" opacity="0.7"/>
+        <defs><linearGradient id="baggrad3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+      </svg>
+
+      <!-- Stars and hearts sprinkled -->
+      <div class="kw-sparkle s1">✦</div>
+      <div class="kw-sparkle s2">♡</div>
+      <div class="kw-sparkle s3">✿</div>
+      <div class="kw-sparkle s4">★</div>
+      <div class="kw-sparkle s5">♡</div>
+      <div class="kw-sparkle s6">✦</div>
+      <div class="kw-sparkle s7">✿</div>
+      <div class="kw-sparkle s8">★</div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">🌸 Kawaii Mystery Shop</div>
+      <h1>Mystery scoops &amp;<br/><em>cute handbags</em> ✨</h1>
+      <p>Adorable surprise scoops and kawaii handbags — curated with love, shipped across the USA 🇺🇸</p>
+      <div class="hero-tags">
+        <button class="hero-tag active" onclick="filterTag(this,'all')">🎁 All Products</button>
+        <button class="hero-tag" onclick="filterTag(this,'scoop')">🌟 Mystery Scoops</button>
+        <button class="hero-tag" onclick="filterTag(this,'bag')">👜 Handbags</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP LAYOUT -->
+  <div class="shop-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Availability</div>
+        <div class="filter-option">
+          <input type="checkbox" id="instock" checked />
+          <label for="instock">In stock (6)</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="outstock" />
+          <label for="outstock">Out of stock (0)</label>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <div class="price-inputs">
+          <input class="price-input" type="number" placeholder="$0" id="minPrice" />
+          <input class="price-input" type="number" placeholder="$220" id="maxPrice" />
+        </div>
+        <button class="apply-btn" onclick="applyPrice()">Apply</button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Sort By</div>
+        <select class="sort-select" onchange="sortProducts(this.value)">
+          <option value="featured">⭐ Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="newest">Newest</option>
+          <option value="bestseller">Best Selling</option>
+        </select>
+      </div>
+      <!-- Shipping Info Box -->
+      <div class="shipping-info-box">
+        <strong><span class="flag">🇺🇸</span> USA Shipping Only</strong>
+        We currently ship to residential addresses within the United States only.<br/><br/>
+        🎉 <strong>FREE shipping</strong> on orders over <strong>$300</strong>.<br/><br/>
+        Shipping cost is calculated at checkout based on your location. Processing time: 7–10 business days.
+      </div>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <div>
+      <div class="grid-header">
+        <h2>All Products</h2>
+        <span id="productCount">6 items</span>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>Frequently Asked Questions 💬</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Where do you ship to?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">We ship exclusively within the United States 🇺🇸. We are unable to ship to military addresses, commercial addresses, or P.O. boxes. Please enter a valid residential US address when placing your order.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How do I get free shipping?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Orders totaling $300 or more qualify for FREE standard shipping! For orders under $300, shipping costs are calculated at checkout based on your delivery location within the USA.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        When will my order be shipped?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Current order processing time is 7–10 business days. Once handed over to the carrier, tracking will appear in your order details within a few additional days. Processing time is separate from shipping transit time — thank you for your patience! 💌</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What's inside a Mystery Scoop?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Each scoop is a mystery collection of kawaii goodies — think stationery, accessories, plush charms, keychains, and more! The higher the scoop tier, the more exclusive and valuable the items inside. Every scoop is a surprise! 🎁</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I return or exchange my scoop?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Because scoops are mystery items, we do not accept returns or exchanges on opened orders. If your package arrives damaged, please contact us within 48 hours with photos and we'll make it right! 🌸</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo"><div class="logo-icon">🎀</div> Scoop<span style="color:var(--coral)">ify</span></a>
+        <p>✨ Kawaii mystery scoops &amp; adorable handbags — Sanrio-inspired, delivered with love 🌸</p>
+        <div class="footer-ship-note">🇺🇸 Ships to United States only · Free shipping over $300</div>
+        <div class="footer-socials">
+          <a href="#" class="social-link">📸</a>
+          <a href="#" class="social-link">🎵</a>
+          <a href="#" class="social-link">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">Mystery Scoops</a></li>
+          <li><a href="#">Handbags</a></li>
+          <li><a href="#">Mystery Bundles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:12px">Early access &amp; exclusive deals 💌</p>
+        <div class="email-form">
+          <input class="email-input" type="email" placeholder="your@email.com" />
+          <button class="email-btn">Join</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Scoopify · All rights reserved.</span>
+      <span>🎀 Made with kawaii love · 🌸 Sanrio-inspired · 🇺🇸 USA only</span>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">🛍 Added to bag!</div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <span>🛍 Your Bag</span>
+      <button class="close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <div class="cart-empty">
+        <div class="empty-icon">🛍</div>
+        <p>Your bag is empty.<br/>Add something adorable!</p>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="drawerSubtotal">$0.00</span></div>
+      <div class="cart-summary-row"><span>Shipping</span><span id="drawerShipping">Calculated at checkout</span></div>
+      <div class="cart-summary-row total"><span>Total</span><span id="drawerTotal">$0.00</span></div>
+      <button class="checkout-btn" id="checkoutBtn" onclick="openBilling()" disabled>Proceed to Checkout →</button>
+    </div>
+  </div>
+
+  <!-- BILLING MODAL -->
+  <div class="billing-modal" id="billingModal">
+    <div class="billing-box">
+      <div class="billing-head">
+        <h2 id="billingTitle">📦 Checkout</h2>
+        <button class="close-btn" onclick="closeBilling()">✕</button>
+      </div>
+      <!-- Steps indicator -->
+      <div class="billing-steps">
+        <div class="step-dot active" id="sdot1">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="sdot2">2</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="sdot3">3</div>
+      </div>
+      <div class="billing-body">
+
+        <!-- STEP 1: Shipping Info -->
+        <div class="billing-step-panel active" id="bstep1">
+          <div class="billing-section-title">🚚 Shipping Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="firstName" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="lastName" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="email" placeholder="jane@email.com" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Street Address</label>
+              <input type="text" id="address" placeholder="123 Blossom Lane" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" id="city" placeholder="Los Angeles" />
+            </div>
+            <div class="form-group">
+              <label>State</label>
+              <select id="state">
+                <option value="">Select state</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                <option>Arkansas</option><option>California</option><option>Colorado</option>
+                <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                <option>Texas</option><option>Utah</option><option>Vermont</option>
+                <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                <option>Wisconsin</option><option>Wyoming</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>ZIP Code</label>
+              <input type="text" id="zip" placeholder="90001" maxlength="5" />
+            </div>
+          </div>
+          <div class="billing-actions">
+            <button class="btn-back" onclick="closeBilling()">← Back to Cart</button>
+            <button class="btn-next" onclick="goStep(2)">Continue to Payment →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Payment -->
+        <div class="billing-step-panel" id="bstep2">
+          <div class="billing-section-title">💳 Payment Details</div>
+          <div class="card-icons">💳 🏦 📱</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Cardholder Name</label>
+              <input type="text" id="cardName" placeholder="Jane Doe" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Card Number</label>
+              <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="text" id="expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" />
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" id="cvv" placeholder="123" maxlength="4" />
+            </div>
+          </div>
+          <div style="background:var(--light);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--mid);margin-top:4px;display:flex;align-items:center;gap:8px;">
+            🔒 Your payment info is encrypted and secure.
+          </div>
+          <div class="billing-actions">
+            <button class="btn-back" onclick="goStep(1)">← Back</button>
+            <button class="btn-next" onclick="goStep(3)">Review Order →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Review & Place Order -->
+        <div class="billing-step-panel" id="bstep3">
+          <div class="billing-section-title">🧾 Order Review</div>
+          <div class="order-review-items" id="reviewItemsList"></div>
+          <div class="billing-totals">
+            <div class="billing-total-row"><span>Subtotal</span><span id="reviewSubtotal"></span></div>
+            <div class="billing-total-row"><span>Shipping</span><span id="reviewShipping"></span></div>
+            <div class="billing-total-row grand"><span>Total</span><span id="reviewTotal"></span></div>
+          </div>
+          <div style="background:var(--light);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--mid);margin-bottom:4px;">
+            📍 Delivering to: <strong id="reviewAddress"></strong>
+          </div>
+          <div class="billing-actions">
+            <button class="btn-back" onclick="goStep(2)">← Back</button>
+            <button class="btn-next" onclick="placeOrder()" style="background:var(--usa-blue);">🛍 Place Order</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Success -->
+        <div class="billing-step-panel" id="bstep4">
+          <div class="success-screen">
+            <div class="success-icon">🎉</div>
+            <h3>Order Confirmed!</h3>
+            <p>Thank you for your order! You'll receive a confirmation email shortly.<br/>Your mystery goodies are being packed with love. 🌸</p>
+            <div class="order-num" id="orderNum"></div>
+            <div class="billing-actions" style="justify-content:center;margin-top:24px;">
+              <button class="btn-next" onclick="closeBillingSuccess()" style="flex:none;padding:13px 32px;">Continue Shopping ✨</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const FREE_SHIPPING_THRESHOLD = 300;
+
+    const products = [
+      { id:1, name:"🎀 1 Scoop + 1 Free Gift", price:89.99, tag:"scoop", badge:"NEW", emoji:"🎀", stars:5, reviews:214, desc:"1 mystery scoop + 1 surprise free gift included!" },
+      { id:2, name:"🌟 2 Scoops + 2 Free Gifts", price:159.99, tag:"scoop", badge:null, emoji:"🌟", stars:5, reviews:187, desc:"2 mystery scoops + 2 surprise free gifts included!" },
+      { id:3, name:"✨ 3 Scoops + 3 Free Gifts", price:219.99, tag:"scoop", badge:"BEST", emoji:"✨", stars:5, reviews:143, desc:"3 mystery scoops + 3 surprise free gifts included!" },
+      { id:4, name:"👜 Kawaii Mini Handbag + 1 Free Gift", price:99.99, tag:"bag", badge:"NEW", emoji:"👜", stars:5, reviews:98, desc:"Adorable kawaii mini handbag + 1 surprise free gift!" },
+      { id:5, name:"👛 Pastel Crossbody Bag + 1 Free Gift", price:119.99, tag:"bag", badge:null, emoji:"👛", stars:4, reviews:76, desc:"Pastel crossbody handbag + 1 surprise free gift!" },
+      { id:6, name:"🎒 Dreamy Tote Bag + 2 Free Gifts", price:139.99, tag:"bag", badge:null, emoji:"🎒", stars:5, reviews:112, desc:"Spacious dreamy tote handbag + 2 surprise free gifts!" },
+    ];
+
+    // Cart state: { id, name, price, emoji, qty }
+    let cart = [];
+    let cartTotal = 0;
+    let cartCount = 0;
+    let activeTag = 'all';
+    let sortMode = 'featured';
+    let billingStep = 1;
+
+    /* ── CART HELPERS ── */
+    function recalcCart() {
+      cartTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      cartCount = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('cartBadge').textContent = cartCount;
+      document.getElementById('drawerSubtotal').textContent = '$' + cartTotal.toFixed(2);
+      document.getElementById('drawerTotal').textContent = '$' + cartTotal.toFixed(2);
+      const shippingMsg = cartTotal >= FREE_SHIPPING_THRESHOLD ? '🎉 FREE' : 'Calculated at checkout';
+      document.getElementById('drawerShipping').textContent = shippingMsg;
+      document.getElementById('checkoutBtn').disabled = cart.length === 0;
+      updateShippingBar();
+    }
+
+    function renderCartItems() {
+      const el = document.getElementById('cartItemsList');
+      if (cart.length === 0) {
+        el.innerHTML = '<div class="cart-empty"><div class="empty-icon">🛍</div><p>Your bag is empty.<br/>Add something adorable!</p></div>';
+      } else {
+        el.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-emoji">${item.emoji}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+              <div class="cart-item-qty">
+                <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+              </div>
+            </div>
+            <button class="remove-item" onclick="removeItem(${item.id})" title="Remove">🗑</button>
+          </div>
+        `).join('');
+      }
+      recalcCart();
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      renderCartItems();
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      renderCartItems();
+    }
+
+    /* ── CART OPEN/CLOSE ── */
+    function openCart() {
+      renderCartItems();
+      document.getElementById('cartDrawer').classList.add('open');
+      document.getElementById('overlay').classList.add('show');
+    }
+    function closeCart() {
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+    function closeAll() { closeCart(); closeBilling(); }
+
+    /* ── SHIPPING BAR ── */
+    function updateShippingBar() {
+      const pct = Math.min((cartTotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      const remaining = (FREE_SHIPPING_THRESHOLD - cartTotal).toFixed(2);
+      const msg = cartTotal >= FREE_SHIPPING_THRESHOLD
+        ? '🎉 You have FREE shipping!'
+        : `Add $${remaining} more for free shipping`;
+      document.getElementById('shippingMsg').textContent = msg;
+    }
+
+    /* ── PRODUCT GRID ── */
+    function renderProducts(list) {
+      const grid = document.getElementById('productsGrid');
+      document.getElementById('productCount').textContent = `${list.length} item${list.length !== 1 ? 's' : ''}`;
+      grid.innerHTML = list.map(p => `
+        <div class="product-card" data-id="${p.id}">
+          ${p.badge ? `<div class="badge ${p.badge === 'NEW' ? 'new' : p.badge === 'BEST' ? 'best' : 'sale'}">${p.badge === 'BEST' ? '⭐ BEST VALUE' : p.badge}</div>` : ''}
+          <button class="wishlist-btn" onclick="toggleWish(this)" title="Wishlist">🤍</button>
+          <div class="product-img">${p.emoji}</div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-desc">${p.desc || ''}</div>
+            <div class="product-meta">
+              <div class="product-price">$${p.price.toFixed(2)}</div>
+              <div class="product-stars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)} <span style="color:#aaa;font-size:11px">(${p.reviews})</span></div>
+            </div>
+            <button class="add-btn" onclick="addToCart(this, ${p.id})">Add to Bag 🎀</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getFiltered() {
+      let list = [...products];
+      if (activeTag !== 'all') list = list.filter(p => p.tag === activeTag);
+      const min = parseFloat(document.getElementById('minPrice').value) || 0;
+      const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+      list = list.filter(p => p.price >= min && p.price <= max);
+      if (sortMode === 'price-low') list.sort((a,b) => a.price - b.price);
+      else if (sortMode === 'price-high') list.sort((a,b) => b.price - a.price);
+      else if (sortMode === 'newest') list.sort((a,b) => b.id - a.id);
+      return list;
+    }
+
+    function filterTag(btn, tag) {
+      document.querySelectorAll('.hero-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTag = tag;
+      renderProducts(getFiltered());
+    }
+
+    function sortProducts(val) { sortMode = val; renderProducts(getFiltered()); }
+    function applyPrice() { renderProducts(getFiltered()); }
+
+    function addToCart(btn, id) {
+      const p = products.find(x => x.id === id);
+      const existing = cart.find(i => i.id === id);
+      if (existing) { existing.qty++; }
+      else { cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, qty: 1 }); }
+      recalcCart();
+      btn.textContent = 'Added! 💕';
+      btn.classList.add('added');
+      setTimeout(() => { btn.textContent = 'Add to Bag 🎀'; btn.classList.remove('added'); }, 1800);
+      const prevTotal = cartTotal - p.price;
+      if (prevTotal < FREE_SHIPPING_THRESHOLD && cartTotal >= FREE_SHIPPING_THRESHOLD) {
+        showToast('🎉 You unlocked FREE shipping!');
+      } else {
+        showToast('Added to bag! 🛍');
+      }
+    }
+
+    function toggleWish(btn) {
+      btn.classList.toggle('active');
+      btn.textContent = btn.classList.contains('active') ? '❤️' : '🤍';
+    }
+
+    /* ── BILLING ── */
+    function openBilling() {
+      closeCart();
+      goStep(1);
+      document.getElementById('billingModal').classList.add('open');
+      document.getElementById('overlay').classList.add('show');
+    }
+    function closeBilling() {
+      document.getElementById('billingModal').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+    function closeBillingSuccess() {
+      closeBilling();
+      cart = [];
+      renderCartItems();
+      recalcCart();
+      renderProducts(getFiltered());
+    }
+
+    function goStep(n) {
+      if (n === 2 && !validateStep1()) return;
+      if (n === 3 && !validateStep2()) return;
+      billingStep = n;
+      [1,2,3,4].forEach(i => {
+        document.getElementById('bstep' + i).classList.toggle('active', i === n);
+        const dot = document.getElementById('sdot' + i);
+        if (dot) {
+          dot.classList.toggle('active', i === n);
+          dot.classList.toggle('done', i < n);
+        }
+      });
+      const titles = { 1:'📦 Shipping Info', 2:'💳 Payment', 3:'🧾 Review Order', 4:'✅ Confirmed' };
+      document.getElementById('billingTitle').textContent = titles[n] || '📦 Checkout';
+      if (n === 3) buildReview();
+    }
+
+    function validateStep1() {
+      const fields = ['firstName','lastName','email','address','city','state','zip'];
+      let ok = true;
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.classList.add('error'); ok = false; }
+        else el.classList.remove('error');
+      });
+      if (!ok) showToast('⚠️ Please fill all shipping fields');
+      return ok;
+    }
+
+    function validateStep2() {
+      const fields = ['cardName','cardNum','expiry','cvv'];
+      let ok = true;
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.classList.add('error'); ok = false; }
+        else el.classList.remove('error');
+      });
+      if (!ok) showToast('⚠️ Please fill all payment fields');
+      return ok;
+    }
+
+    function buildReview() {
+      document.getElementById('reviewItemsList').innerHTML = cart.map(item => `
+        <div class="review-item">
+          <div class="review-item-emoji">${item.emoji}</div>
+          <div class="review-item-name">${item.name} × ${item.qty}</div>
+          <div class="review-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+        </div>
+      `).join('');
+      const shipping = cartTotal >= FREE_SHIPPING_THRESHOLD ? 'FREE 🎉' : 'Calculated at delivery';
+      document.getElementById('reviewSubtotal').textContent = '$' + cartTotal.toFixed(2);
+      document.getElementById('reviewShipping').textContent = shipping;
+      document.getElementById('reviewTotal').textContent = '$' + cartTotal.toFixed(2);
+      const addr = `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}, ${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value}`;
+      document.getElementById('reviewAddress').textContent = addr;
+    }
+
+    function placeOrder() {
+      const orderNum = 'SCO-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('orderNum').textContent = 'Order #' + orderNum;
+      // Hide steps indicator for success
+      document.querySelector('.billing-steps').style.display = 'none';
+      goStep(4);
+      document.getElementById('billingTitle').textContent = '✅ Order Confirmed!';
+    }
+
+    /* ── CARD FORMATTING ── */
+    function formatCard(el) {
+      let v = el.value.replace(/\D/g,'').substring(0,16);
+      el.value = v.replace(/(.{4})/g,'$1 ').trim();
+    }
+    function formatExpiry(el) {
+      let v = el.value.replace(/\D/g,'').substring(0,4);
+      if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
+      el.value = v;
+    }
+
+    /* ── TOAST ── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+    renderProducts(getFiltered());
+    updateShippingBar();
+  </script>
+</body>
+</html>
